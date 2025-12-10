@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:news_app/api/api_manager.dart';
 import 'package:news_app/models/source_response.dart';
+import 'package:news_app/ui/home/categary%20details/source_tap_widget.dart';
 
 class CategaryDetails extends StatefulWidget {
   const CategaryDetails({super.key});
@@ -40,16 +39,22 @@ class _CategaryDetailsState extends State<CategaryDetails> {
         // data loaded state
         else if (snapshot.hasData) {
           var sources = snapshot.data!.sources;
-          return ListView.builder(
-            itemCount: sources?.length,
-            itemBuilder: (context, index) {
-              var source = sources![index];
-              return ListTile(
-                title: Text(source.name ?? 'No Name'),
-                subtitle: Text(source.description ?? 'No Description'),
-              );
-            },
-          );
+          return snapshot.data!.status == "error"
+              ? Center(
+                  child: Column(
+                    children: [
+                      Text('Error: ${snapshot.data!.message}'),
+                      ElevatedButton(
+                        onPressed: () {
+                          ApiManager.getSources();
+                          setState(() {});
+                        },
+                        child: const Text('Retry'),
+                      ),
+                    ],
+                  ),
+                )
+              : SourceTapWidget(sourceaList: sources ?? []);
         } else {
           // client error state
           return Center(

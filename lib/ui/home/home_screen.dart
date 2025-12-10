@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/models/source_response.dart';
 import 'package:news_app/ui/home/categary%20details/categary_details.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,10 +11,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Sources? source;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home Screens')),
+      appBar: AppBar(
+        title: Text('Home', style: Theme.of(context).textTheme.headlineLarge),
+      ),
       body: CategaryDetails(),
     );
   }

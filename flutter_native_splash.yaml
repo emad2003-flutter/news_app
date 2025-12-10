@@ -1,0 +1,26 @@
+flutter_native_splash:
+  # Enable full screen splash
+  fullscreen: true
+
+  #========================
+  # Light mode configuration
+  #========================
+  color: "#FFFFFF"                  # White background
+  image: assets/images/splash_white.png
+
+  #========================
+  # Dark mode configuration
+  #========================
+  color_dark: "#000000"             # Black background
+  image_dark: assets/images/splash_dark.png
+
+  #========================
+  # Android 12+ configuration
+  #========================
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#000000"
+
+    # Splash image for Android 12 (center logo)
+    image: assets/images/splash_white.png
+    image_dark: assets/images/splash_dark.png
