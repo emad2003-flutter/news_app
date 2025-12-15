@@ -48,6 +48,10 @@ class Sources {
     this.country,
   });
 
+  String? getCategory() {
+    return category;
+  }
+
   Sources.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];

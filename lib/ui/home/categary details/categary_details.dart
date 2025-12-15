@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/Provider/category_provider.dart';
 import 'package:news_app/api/api_manager.dart';
 import 'package:news_app/models/source_response.dart';
 import 'package:news_app/ui/home/categary%20details/source_tap_widget.dart';
+import 'package:provider/provider.dart';
 
 class CategaryDetails extends StatefulWidget {
   const CategaryDetails({super.key});
@@ -13,8 +15,9 @@ class CategaryDetails extends StatefulWidget {
 class _CategaryDetailsState extends State<CategaryDetails> {
   @override
   Widget build(BuildContext context) {
+    var categoryProvider = Provider.of<CategoryProvider>(context);
     return FutureBuilder<SourceResponse?>(
-      future: ApiManager.getSources(),
+      future: ApiManager.getSources(categoryProvider.selectedCategory),
       builder: (context, snapshot) {
         // Loading state
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -27,7 +30,7 @@ class _CategaryDetailsState extends State<CategaryDetails> {
                 Text('Error: ${snapshot.error}'),
                 ElevatedButton(
                   onPressed: () {
-                    ApiManager.getSources();
+                    ApiManager.getSources(categoryProvider.selectedCategory);
                     setState(() {});
                   },
                   child: const Text('Retry'),
@@ -46,7 +49,9 @@ class _CategaryDetailsState extends State<CategaryDetails> {
                       Text('Error: ${snapshot.data!.message}'),
                       ElevatedButton(
                         onPressed: () {
-                          ApiManager.getSources();
+                          ApiManager.getSources(
+                            categoryProvider.selectedCategory,
+                          );
                           setState(() {});
                         },
                         child: const Text('Retry'),
@@ -63,7 +68,7 @@ class _CategaryDetailsState extends State<CategaryDetails> {
                 Text('no Data Found'),
                 ElevatedButton(
                   onPressed: () {
-                    ApiManager.getSources();
+                    ApiManager.getSources(categoryProvider.selectedCategory);
                     setState(() {});
                   },
                   child: const Text('Retry'),

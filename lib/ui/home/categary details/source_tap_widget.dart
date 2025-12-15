@@ -20,9 +20,9 @@ class _SourceTapWidgetState extends State<SourceTapWidget> {
   Widget build(BuildContext context) {
     // Responsive design calculations
     var designWidth = 393;
-    var deviceWidth = MediaQuery.of(context).size.width;
+    var width = MediaQuery.of(context).size.width;
     var designHeight = 720;
-    var deviceHeight = MediaQuery.of(context).size.height;
+    var height = MediaQuery.of(context).size.height;
     return DefaultTabController(
       length: widget.sourceaList.length,
       child: Column(
